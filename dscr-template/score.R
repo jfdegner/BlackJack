@@ -7,7 +7,7 @@ for(j in 1:length(data$meta$cards_to_deal)) {
 player <- data$meta$cards_to_deal[[j]][1:2]
 dealer <- data$meta$cards_to_deal[[j]][3:4]
 decision <- output$decisionFunction(player, dealer[1], data$meta$cards_seen[[j]])
-print(decision)
+#print(decision)
 bet <- output$bet
 i=5
 if(decision == 'D') {
