@@ -126,5 +126,6 @@ if(sum(player) == 21 & length(player) == 2){
 }
 tooutput[[j]] <- list(outcomes=outcome, bets=bet)
 }
-return(output)
+summary <- sum(sapply(tooutput, function(i) sum(i[[1]]*i[[2]])))
+return(summary)
 }
