@@ -1,6 +1,16 @@
-#This is the same as SimpleHS except double down option is added as an option where appropriate
+#This is the same as SimpleHS except double down and split options are added as an option where appropriate
 #Optimum decisions are still taken from https://www.blackjackinfo.com/blackjack-basic-strategy-engine/
-SimpleHSD <- function(input, args) {
+SimpleHSDSp <- function(input, args) {
+  decision_pair <- matrix('H',nrow=22, ncol=10)
+  colnames(decision_pair) <- 2:11
+  rownames(decision_pair) <- 1:22
+  decision_pair[c(2,8,22),] <- 'Sp'
+  decision_pair[c(4,6,14),1:6] <- 'Sp'
+  decision_pair[c(8),4:5] <- 'Sp'  
+  decision_pair[12,1:5] <- 'Sp'
+  decision_pair[10,1:8] <- 'D'
+  decision_pair[17:22,] <- 'S'
+  decision_pair[18,c(1:5, 7:8)] <- 'Sp'  
   decision_softsum <- matrix('H',nrow=21, ncol=10)
   rownames(decision_softsum) <- 1:21
   colnames(decision_softsum) <- 2:11
@@ -22,11 +32,15 @@ SimpleHSD <- function(input, args) {
   decision_sum[14:16,c(1:5)] <- 'S'
   decision_sum[17:21,] <- 'S'
   decisionFunction <- function(PlayersCards, DealersCard, CardsDealt) {
-    if(sum(PlayersCards) < 21) {
-      if(sum(PlayersCards == 11) > 0) {
-        decision_softsum[sum(PlayersCards),DealersCard-1]
-      } else{return(decision_sum[sum(PlayersCards),DealersCard-1])}
-    } else {return('S')}
+    if(length(PlayersCards) == 2 && PlayersCards[1] == PlayersCards[2]) {
+      return(decision_pair[sum(PlayersCards),DealersCard-1])
+    } else {
+      if(sum(PlayersCards) < 21) {
+        if(sum(PlayersCards == 11) > 0) {
+          decision_softsum[sum(PlayersCards),DealersCard-1]
+        } else{return(decision_sum[sum(PlayersCards),DealersCard-1])}
+      } else {return('S')}
+    }
   }
   return(list(bet=args$bet, decisionFunction=decisionFunction))
 }
