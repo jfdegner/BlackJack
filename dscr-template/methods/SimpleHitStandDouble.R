@@ -22,6 +22,8 @@ SimpleHSD <- function(input, args) {
   decision_sum[14:16,c(1:5)] <- 'S'
   decision_sum[17:21,] <- 'S'
   decisionFunction <- function(PlayersCards, DealersCard, CardsDealt) {
+    if(length(PlayersCards) > 2) {decision_sum[decision_sum == 'D'] <- 'H'}
+    if(length(PlayersCards) > 2) {decision_softsum[decision_softsum == 'D'] <- 'H'}
     if(sum(PlayersCards) < 21) {
       if(sum(PlayersCards == 11) > 0) {
         decision_softsum[sum(PlayersCards),DealersCard-1]
