@@ -45,7 +45,8 @@ This method always makes the same card-playing decisions as the previous method,
 
 The results below suggest that this card counting strategy can give a player a substantial advantage in 2-Deck blackjack, can decrease the expected loss in 6-deck blackjack, and has almost no effect in 10-deck blackjack
 
-
-10DeckBJ	SimpleHitStandDoubleSplit_HiLo	-0.012089300
-2DeckBJ	SimpleHitStandDoubleSplit_HiLo	 0.009594838
-6DeckBJ	SimpleHitStandDoubleSplit_HiLo	-0.004958975
+|scenario|method	|WinningsPerBet|
+|-----|-----|-----|
+|10DeckBJ	|SimpleHitStandDoubleSplit_HiLo|	-0.012089300|
+|2DeckBJ	|SimpleHitStandDoubleSplit_HiLo|	 0.009594838|
+|6DeckBJ	|SimpleHitStandDoubleSplit_HiLo|	-0.004958975|
