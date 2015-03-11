@@ -148,7 +148,7 @@ if(sum(player) == 21 & length(player) == 2){
 #print('Outcome of this hand is')
 #print(outcome)
 #print('Total wagered this hand is')
-#print(bet)
+print(bet)
 tooutput[[j]] <- list(outcomes=outcome, bets=bet)
 }
 WinningsPerBet <- sum(sapply(tooutput, function(i) sum(i[[1]]*i[[2]])))/sum(sapply(tooutput, function(i) sum(i[[2]])))

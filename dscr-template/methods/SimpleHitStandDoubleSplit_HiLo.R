@@ -55,10 +55,10 @@ SimpleHSDSpHL <- function(input, args) {
   raw_count <- sapply(input$cards_seen, function(seen) sum(seen[2:6]) - sum(seen[10:11]))
   true_count <- raw_count/(as.numeric(input$datamakerargs$decks) - sapply(input$cards_seen, function(seen) sum(seen)/52))
   bet=rep(1, length(true_count))
-  bet[true_count > 2] <- 2
-  bet[true_count > 3] <- 4
-  bet[true_count > 4] <- 8
-  bet[true_count > 5] <- 16
-  bet[true_count > 6] <- 32
+  bet[true_count > 4] <- 2
+  bet[true_count > 5] <- 4
+  bet[true_count > 6] <- 8
+  bet[true_count > 7] <- 16
+  bet[true_count > 8] <- 32
   return(list(bet=bet, decisionFunction=decisionFunction))
 }

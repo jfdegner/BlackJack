@@ -17,7 +17,7 @@ datamaker<-function(args) {
     cards <- sample(c(rep(2:11, args$decks*4), rep(10, 3*args$decks*4)), 52*args$decks)
     cards_seen[[k]] <- tabulate(cards[1:i], 11)
     cards2 <- c(cards, sample(c(rep(2:11, args$decks*4), rep(10, 3*args$decks*4)), 52*args$decks))
-    cards_to_deal[[k]] <- cards2[i:(i + 51)]
+    cards_to_deal[[k]] <- cards2[(i+1):(i + 51)]
     }
   input=list(cards_seen=cards_seen, datamakerargs=args)
   meta=list(cards_to_deal=cards_to_deal)
