@@ -8,8 +8,7 @@
   # p - proportion of shoe dealt
   # hands - number of hands played
   # deal - cards seen per deal
-datamaker<-function(seed, args) {
-  set.seed(seed)
+datamaker<-function(args) {
   cards_seen <- vector('list', args$hands)
   cards_to_deal <- vector('list', args$hands)
   for(k in seq(1, args$hands)) {
@@ -20,7 +19,7 @@ datamaker<-function(seed, args) {
     cards2 <- c(cards, sample(c(rep(2:11, args$decks*4), rep(10, 3*args$decks*4)), 52*args$decks))
     cards_to_deal[[k]] <- cards2[i:(i + 51)]
     }
-  input=list(cards_seen=cards_seen)
+  input=list(cards_seen=cards_seen, datamakerargs=args)
   meta=list(cards_to_deal=cards_to_deal)
   data = list(meta=meta,input=input)
   return(data)
