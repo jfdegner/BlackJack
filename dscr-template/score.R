@@ -11,7 +11,8 @@ decision <- output$decisionFunction(player, dealer[1], data$meta$cards_seen[[j]]
 #if(class(try({if(decision == 'Sp') {#print('break')}})) == 'try-error') {browser(); output$decisionFunction(player, dealer[1], data$meta$cards_seen[[j]])}
 #if(decision == 'Sp') browser()
 #print(list(FirstDecision=decision, PlayersCards=player, DealersCard=dealer))
-bet <- output$bet
+if(length(output$bet) == 1) bet <- output$bet
+if(length(output$bet) > 1) bet <- output$bet[[j]]
 i=5
 if(decision == 'D') {
   bet = bet*2; 
