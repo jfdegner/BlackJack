@@ -15,22 +15,28 @@ This method simply decides to hit or stand based on the sum of the players cards
 
 #SimpleHitStand
 This method limits decisions to Hit or Stand but takes into account the dealer's visible card.   Often video-based blackjack games limit the player to these options.
-scenario	method	WinningsPerBet
-10DeckBJ	SimpleHitStand	-0.025122000
-2DeckBJ	SimpleHitStand	-0.022971500
-6DeckBJ	SimpleHitStand	-0.023402000
+|scenario|method	|WinningsPerBet|
+|-----|-----|-----|
+|10DeckBJ|	SimpleHitStand|	-0.025122000|
+|2DeckBJ|	SimpleHitStand|	-0.022971500|
+|6DeckBJ|	SimpleHitStand|	-0.023402000|
 
 #SimpleHitStandDouble
 This method is like the previous, but allows the player the option to double-down when it is advantageous.
-10DeckBJ	SimpleHitStandDouble	-0.012883806
-2DeckBJ	SimpleHitStandDouble	-0.009856444
-6DeckBJ	SimpleHitStandDouble	-0.011111093
+|scenario|method	|WinningsPerBet|
+|-----|-----|-----|
+|10DeckBJ	|SimpleHitStandDouble|	-0.012883806
+|2DeckBJ	|SimpleHitStandDouble|	-0.009856444
+|6DeckBJ	|SimpleHitStandDouble|	-0.011111093
 
 #SimpleHitStandDoubleSplit
 This method allows all normal blackjack options but does not consider cards dealt in previous hands (i.e., no card counting system).  Decisions are hard coded and were taken from https://www.blackjackinfo.com/blackjack-basic-strategy-engine/.  Overall house edge is a little bit higher than what this website reports (I get a house edge around 1% wheras they report around 0.7%).  This could be because right now I hard code that only one split is allowed.   It is also possible there is a bug somewhere.  In the simulations below, you do see that the house has a greater advantage with more decks even in the absense of card counting. 
-10DeckBJ	SimpleHitStandDoubleSplit	-0.012336347
-2DeckBJ	SimpleHitStandDoubleSplit	-0.009381720
-6DeckBJ	SimpleHitStandDoubleSplit	-0.010409513
+
+|scenario|method	|WinningsPerBet|
+|-----|-----|-----|
+|10DeckBJ|	SimpleHitStandDoubleSplit|	-0.012336347|
+|2DeckBJ|	SimpleHitStandDoubleSplit|	-0.009381720|
+|6DeckBJ|	SimpleHitStandDoubleSplit|	-0.010409513|
 
 #SimpleHitStandDoubleSplit_HiLo
 This method always makes the same card-playing decisions as the previous method, but adjusts the players bet based on the running count of high and low cards played.   In the high-low system, a player remembers a single number.  When dealing from a shuffled deck begins, the count is set to 0.   For every card with value 2-6, the count is increased by one.  For every 10-valued card or ace, the count is decreased by one.  This raw count is adjusted by deviding by the number of decks left to play to get a 'true count'.  In this implimentation, the players bet is doubled for every integer increase of the 'true count' above 3 (e.g., bet is 2X for true count of 4, 4X for tc of 5, 8X for tc of 6).
