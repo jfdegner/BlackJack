@@ -15,6 +15,7 @@ This method simply decides to hit or stand based on the sum of the players cards
 
 #SimpleHitStand
 This method limits decisions to Hit or Stand but takes into account the dealer's visible card.   Often video-based blackjack games limit the player to these options.
+
 |scenario|method	|WinningsPerBet|
 |-----|-----|-----|
 |10DeckBJ|	SimpleHitStand|	-0.025122000|
@@ -23,6 +24,7 @@ This method limits decisions to Hit or Stand but takes into account the dealer's
 
 #SimpleHitStandDouble
 This method is like the previous, but allows the player the option to double-down when it is advantageous.
+
 |scenario|method	|WinningsPerBet|
 |-----|-----|-----|
 |10DeckBJ	|SimpleHitStandDouble|	-0.012883806|
