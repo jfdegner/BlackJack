@@ -7,10 +7,11 @@ I have implemented five blackjack strategies so far - three are strawmen for com
 #SimpleSumThresh
 This method simply decides to hit or stand based on the sum of the players cards. Using this method of hitting on anything less than 16 gives these results for 2, 6, and 10 deck blackjack:
 
-scenario	method	WinningsPerBet
-10DeckBJ	SimpleSumThresh	-0.055037000
-2DeckBJ	SimpleSumThresh	-0.055163500
-6DeckBJ	SimpleSumThresh	-0.053512000
+|scenario|	method|	WinningsPerBet|
+|-----|----|----|
+|10DeckBJ|	SimpleSumThresh|	-0.055037000|
+|2DeckBJ|	SimpleSumThresh|	-0.055163500|
+|6DeckBJ|	SimpleSumThresh|	-0.053512000|
 
 #SimpleHitStand
 This method limits decisions to Hit or Stand but takes into account the dealer's visible card.   Often video-based blackjack games limit the player to these options.
