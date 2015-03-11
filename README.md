@@ -1,6 +1,6 @@
 # BlackJack
 
-This is a set of R functions for simulating blackjack play and comparing player-strategies.  The current version is working but is relatively ridged with respect to simulating different blackjack variants.  If people find this interesting or useful, I will go back to it and make it more flexible. 
+This is a set of R functions for simulating blackjack play and comparing player-strategies.  The current version is working but is relatively ridged with respect to simulating different blackjack variants.  If people find this interesting or useful, I will go back to it and make it more flexible. For example, right now I hard code things like the number of splits allowed, the payout on blackjack, and the dealers decision on soft 17.
 
 I have implemented five blackjack strategies so far - three are straw men for comparison, one is an optimal strategy without card counting and one uses the Hi-Lo system of card counting where betting is doubled for each integer increase in true count above 3.  More detail on strategy is given below with the resulting estimates of house edge given 1,000,000 simulated blackjack hands.
 
