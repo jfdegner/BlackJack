@@ -25,9 +25,9 @@ This method limits decisions to Hit or Stand but takes into account the dealer's
 This method is like the previous, but allows the player the option to double-down when it is advantageous.
 |scenario|method	|WinningsPerBet|
 |-----|-----|-----|
-|10DeckBJ	|SimpleHitStandDouble|	-0.012883806
-|2DeckBJ	|SimpleHitStandDouble|	-0.009856444
-|6DeckBJ	|SimpleHitStandDouble|	-0.011111093
+|10DeckBJ	|SimpleHitStandDouble|	-0.012883806|
+|2DeckBJ	|SimpleHitStandDouble|	-0.009856444|
+|6DeckBJ	|SimpleHitStandDouble|	-0.011111093|
 
 #SimpleHitStandDoubleSplit
 This method allows all normal blackjack options but does not consider cards dealt in previous hands (i.e., no card counting system).  Decisions are hard coded and were taken from https://www.blackjackinfo.com/blackjack-basic-strategy-engine/.  Overall house edge is a little bit higher than what this website reports (I get a house edge around 1% wheras they report around 0.7%).  This could be because right now I hard code that only one split is allowed.   It is also possible there is a bug somewhere.  In the simulations below, you do see that the house has a greater advantage with more decks even in the absense of card counting. 
