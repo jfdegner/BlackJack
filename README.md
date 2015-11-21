@@ -23,14 +23,15 @@ install_github("stephens999/dscr",build_vignettes=TRUE)
 
 Clone this repo to your computer (which should already have git and R):
 
+<pre><code>
 git clone https://github.com/jfdegner/BlackJack.git
 </code></pre>
 
 # Run the simulations:
 
-<pre><code>
 using BlackJack/blackjack_dscr_code as a working directory, run:
 
+<pre><code>
 source('run_dscr.R')
 </code></pre>
 
