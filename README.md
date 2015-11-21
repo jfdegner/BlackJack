@@ -5,9 +5,9 @@ The idea here was to build a framework for easily comparing blackjack strategies
 
 https://github.com/stephens999/dscr/blob/master/intro.md
 
-A hypothetical user of this DSCR I imagine to be someone who wants to understand blackjack and card counting or someone who has imagined a new card counting strategy and wants to compare it to those already implimented here.
+A hypothetical user of this DSCR I imagine to be someone who wants to understand blackjack and card counting or someone who has imagined a new card counting strategy and wants to compare it to those already implemented here.
 
-One of the main points of putting a simulation framework like this into a DSCR is so it can be easily reproduced and extended.  While there exist many more nobel problems where these goals should be strived for, I choose to make my first DSCR about blackjack.  Below, I try to succinctly describe how to:
+One of the main points of putting a simulation framework like this into a DSCR is so it can be easily reproduced and extended. Below, I try to succinctly describe how to:
 
 1) Clone this repo and repeat the simulations I describe below  
 2) Add a new blackjack strategy  
@@ -23,18 +23,36 @@ Clone this repo to your computer (which should already have git and R):
 
 git clone https://github.com/jfdegner/BlackJack.git
 
-Run the simulations:
+# Run the simulations:
 
+using BlackJack/blackjack_dscr_code as a working directory, run:
+source('run_dscr.R')
 
+If everything worked as it should, you will now have an R object called summaryResults that replicates the results I describe below.  
 
-This DSC uses the following formats:
+# Add a method
 
-input: list(name [type]) # Add more explanation of each element here
+The real benefit of a DSCR is that you can easily add a new method.  This is as simple as defining a function that implements your method, for example to hit on any card sum less than 18 and stay otherwise, define this:
 
-meta: list(name [type]) # Add more explanation of each element here
+HitBelow18 <- function(input, args) {
+decisionFunction <- function(PlayersCards, DealersCard, CardsDealt) {
+    if(sum(PlayersCards) < 18) {
+    return('H')
+    } else {return('S')}
+    }
+return(list(bet=args$bet, decisionFunction=decisionFunction))
+}
 
-output: list(name [type]) # Add more explanation of each element here
+Add the new method to the DSCR
 
+add_method(dsc_blackjack,name="HitBelow18",fn = HitBelow18,args=list(bet=1))
+
+Re-run the DSCR to include new comparison:
+
+res=run_dsc(dsc_blackjack)
+summaryResults<-aggregate(WinningsPerBet ~ scenario + method, res, mean)
+
+Please contact me if you have any trouble or if you make an interesting method I could add for comparison.   I would be really interested to see how big of an advantage you could get over the house if you had a perfect memory of the cards dealt.   I don't think this function would be too hard to write, but I haven't been able to find the time yet.
 
 # Current methods and results
 
@@ -45,46 +63,47 @@ I have implemented five blackjack strategies so far - three are straw men for co
 #SimpleSumThresh
 This method simply decides to hit or stand based on the sum of the players cards. Using this method of hitting on anything less than 16 gives these results for 2, 6, and 10 deck blackjack:
 
-|scenario|	method|	WinningsPerBet|
+|scenario|  method| WinningsPerBet|
 |-----|----|----|
-|10DeckBJ|	SimpleSumThresh|	-0.055037000|
-|2DeckBJ|	SimpleSumThresh|	-0.055163500|
-|6DeckBJ|	SimpleSumThresh|	-0.053512000|
+|10DeckBJ|  SimpleSumThresh|    -0.055037000|
+|2DeckBJ|   SimpleSumThresh|    -0.055163500|
+|6DeckBJ|   SimpleSumThresh|    -0.053512000|
 
 #SimpleHitStand
 This method limits decisions to Hit or Stand but takes into account the dealer's visible card.   Often video-based blackjack games limit the player to these options.
 
-|scenario|method	|WinningsPerBet|
+|scenario|method    |WinningsPerBet|
 |-----|-----|-----|
-|10DeckBJ|	SimpleHitStand|	-0.025122000|
-|2DeckBJ|	SimpleHitStand|	-0.022971500|
-|6DeckBJ|	SimpleHitStand|	-0.023402000|
+|10DeckBJ|  SimpleHitStand| -0.025122000|
+|2DeckBJ|   SimpleHitStand| -0.022971500|
+|6DeckBJ|   SimpleHitStand| -0.023402000|
 
 #SimpleHitStandDouble
 This method is like the previous, but allows the player the option to double-down when it is advantageous.
 
-|scenario|method	|WinningsPerBet|
+|scenario|method    |WinningsPerBet|
 |-----|-----|-----|
-|10DeckBJ	|SimpleHitStandDouble|	-0.012883806|
-|2DeckBJ	|SimpleHitStandDouble|	-0.009856444|
-|6DeckBJ	|SimpleHitStandDouble|	-0.011111093|
+|10DeckBJ   |SimpleHitStandDouble|  -0.012883806|
+|2DeckBJ    |SimpleHitStandDouble|  -0.009856444|
+|6DeckBJ    |SimpleHitStandDouble|  -0.011111093|
 
 #SimpleHitStandDoubleSplit
 This method allows all normal blackjack options but does not consider cards dealt in previous hands (i.e., no card counting system).  Decisions are hard coded and were taken from https://www.blackjackinfo.com/blackjack-basic-strategy-engine/.  Overall house edge is a little bit higher than what this website reports (I get a house edge around 1% whereas they report around 0.7%).  This could be because right now I hard code that only one split is allowed.  In the simulations below, you do see that the house has a greater advantage with more decks even in the absence of card counting. 
 
-|scenario|method	|WinningsPerBet|
+|scenario|method    |WinningsPerBet|
 |-----|-----|-----|
-|10DeckBJ|	SimpleHitStandDoubleSplit|	-0.012336347|
-|2DeckBJ|	SimpleHitStandDoubleSplit|	-0.009381720|
-|6DeckBJ|	SimpleHitStandDoubleSplit|	-0.010409513|
+|10DeckBJ|  SimpleHitStandDoubleSplit|  -0.012336347|
+|2DeckBJ|   SimpleHitStandDoubleSplit|  -0.009381720|
+|6DeckBJ|   SimpleHitStandDoubleSplit|  -0.010409513|
 
 #SimpleHitStandDoubleSplit_HiLo
 This method always makes the same card-playing decisions as the previous method, but adjusts the player's bet based on the running count of high and low cards played.   In the high-low system, a player remembers a single number.  When dealing from a shuffled deck begins, the count is set to 0.   For every card with value 2-6, the count is increased by one.  For every 10-valued card or ace, the count is decreased by one.  This raw count is adjusted by dividing by the number of decks left to play to get a 'true count'.  In this implementation, the players bet is doubled for every integer increase of the 'true count' above 3 (e.g., bet is 2X for true count of 4, 4X for tc of 5, 8X for tc of 6).
 
 The results below suggest that this card counting strategy can give a player a substantial advantage in 2-Deck blackjack, can decrease the expected loss in 6-deck blackjack, and has almost no effect in 10-deck blackjack
 
-|scenario|method	|WinningsPerBet|
+|scenario|method    |WinningsPerBet|
 |-----|-----|-----|
-|10DeckBJ	|SimpleHitStandDoubleSplit_HiLo|	-0.012089300|
-|2DeckBJ	|SimpleHitStandDoubleSplit_HiLo|	 0.009594838|
-|6DeckBJ	|SimpleHitStandDoubleSplit_HiLo|	-0.004958975|
+|10DeckBJ   |SimpleHitStandDoubleSplit_HiLo|    -0.012089300|
+|2DeckBJ    |SimpleHitStandDoubleSplit_HiLo|     0.009594838|
+|6DeckBJ    |SimpleHitStandDoubleSplit_HiLo|    -0.004958975|
+

@@ -97,9 +97,7 @@ if(decision == 'Sp') {
 while(decision == 'H') {
   player = c(player, data$meta$cards_to_deal[[j]][i])
   i=i+1
-  print(player)
   while(sum(player) > 21 & (sum(player==11) > 0)) {
-    print('here')
     player[player==11][1] <- 1
   }
   decision <- output$decisionFunction(player, dealer[1], data$meta$cards_seen[[j]])
@@ -150,7 +148,7 @@ if(sum(player) == 21 & length(player) == 2){
 #print('Outcome of this hand is')
 #print(outcome)
 #print('Total wagered this hand is')
-print(bet)
+#print(bet)
 tooutput[[j]] <- list(outcomes=outcome, bets=bet)
 }
 WinningsPerBet <- sum(sapply(tooutput, function(i) sum(i[[1]]*i[[2]])))/sum(sapply(tooutput, function(i) sum(i[[2]])))
