@@ -1,4 +1,28 @@
 # BlackJack
+# This is a DSCR
+
+The idea here was to build a framework for easily comparing blackjack strategies using simulations in R.   The framework is a Dynamic Statistical Comparison in R (DSCR) which is a concept from Mathew Stephens that is supposed to enable more efficient development and comparison of statistical methods for any problem.   See here for a description from him:
+
+https://github.com/stephens999/dscr/blob/master/intro.md
+
+A hypothetical user of this DSCR I imagine to be someone who wants to understand blackjack and card counting or someone who has imagined a new card counting strategy and wants to compare it to those already implimented here.
+
+One of the main points of putting a simulation framework like this into a DSCR is so it can be easily used and extended.   Below, I try to succinctly describe how to 
+
+1) Clone this repo and repeat the simulations I describe below
+2) Add a new blackjack strategy
+
+
+This DSC uses the following formats:
+
+input: list(name [type]) # Add more explanation of each element here
+
+meta: list(name [type]) # Add more explanation of each element here
+
+output: list(name [type]) # Add more explanation of each element here
+
+
+# Current methods and results
 
 This is a set of R functions for simulating blackjack play and comparing player-strategies.  The current version is working but is relatively ridged with respect to simulating different blackjack variants.  If people find this interesting or useful, I will go back to it and make it more flexible. For example, right now I hard code things like the number of splits allowed, the payout on blackjack, and the dealer's decision on soft 17.
 
