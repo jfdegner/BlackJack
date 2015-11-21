@@ -52,6 +52,20 @@ return(list(bet=args$bet, decisionFunction=decisionFunction))
 }
 </code></pre>
 
+The function needs to take two lists (input and args) as input and must output a bet and a decisionFunction.  The decision function should return a single character specifying the decision to make under any combination of PlayersCards, DealersCards, and CardsDealt.   Characters and mappings to blackjack options are:
+
+'H' - hit
+'S' - stand
+'Sp' - split
+'D' - double down
+
+to see what an input will look like when passed to your function, call datamaker with this:
+
+<pre><code>
+example_input <- datamaker(args = list(hands=2,deal=10, decks=5, p=0.5))
+</code></pre>
+
+
 Add the new method to the DSCR
 
 <pre><code>
