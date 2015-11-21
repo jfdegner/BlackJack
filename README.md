@@ -5,7 +5,7 @@ The idea here was to build a framework for easily comparing blackjack strategies
 
 https://github.com/stephens999/dscr/blob/master/intro.md
 
-A hypothetical user of this DSCR I imagine to be someone who wants to understand blackjack and card counting or someone who has imagined a new card counting strategy and wants to compare it to those already implemented here.
+A hypothetical user of this DSCR I imagine to be someone who wants to understand blackjack and card counting or someone who has thought up a new card counting or other blackjack strategy and wants to compare it to those already implemented here.
 
 One of the main points of putting a simulation framework like this into a DSCR is so it can be easily reproduced and extended. Below, I try to succinctly describe how to:
 
