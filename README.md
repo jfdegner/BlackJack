@@ -1,7 +1,7 @@
 # BlackJack
 # This is a DSCR
 
-The idea here was to build a framework for easily comparing blackjack strategies using simulations in R.   The framework is a Dynamic Statistical Comparison in R (DSCR) which is a concept from Mathew Stephens that is supposed to enable more efficient development and comparison of statistical methods for any problem.   See here for a description from him:
+The idea here was to build a framework for easily comparing blackjack strategies using simulations in R.   The framework is a Dynamic Statistical Comparison in R (DSCR) which is a concept from Mathew Stephens that enables more efficient development and comparison of statistical methods for any problem.   See here for a description from him:
 
 https://github.com/stephens999/dscr/blob/master/intro.md
 
