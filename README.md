@@ -15,18 +15,24 @@ One of the main points of putting a simulation framework like this into a DSCR i
 # Cloning and running the current version:
 
 Get the necessary dependencies in R:
+<pre><code>
 library(devtools)
 install_github("stephens999/ashr")
 install_github("stephens999/dscr",build_vignettes=TRUE)
+</code></pre>
 
 Clone this repo to your computer (which should already have git and R):
 
 git clone https://github.com/jfdegner/BlackJack.git
+</code></pre>
 
 # Run the simulations:
 
+<pre><code>
 using BlackJack/blackjack_dscr_code as a working directory, run:
+
 source('run_dscr.R')
+</code></pre>
 
 If everything worked as it should, you will now have an R object called summaryResults that replicates the results I describe below.  
 
@@ -34,6 +40,7 @@ If everything worked as it should, you will now have an R object called summaryR
 
 The real benefit of a DSCR is that you can easily add a new method.  This is as simple as defining a function that implements your method, for example to hit on any card sum less than 18 and stay otherwise, define this:
 
+<pre><code>
 HitBelow18 <- function(input, args) {
 decisionFunction <- function(PlayersCards, DealersCard, CardsDealt) {
     if(sum(PlayersCards) < 18) {
@@ -42,15 +49,20 @@ decisionFunction <- function(PlayersCards, DealersCard, CardsDealt) {
     }
 return(list(bet=args$bet, decisionFunction=decisionFunction))
 }
+</code></pre>
 
 Add the new method to the DSCR
 
+<pre><code>
 add_method(dsc_blackjack,name="HitBelow18",fn = HitBelow18,args=list(bet=1))
+</code></pre>
 
 Re-run the DSCR to include new comparison:
 
+<pre><code>
 res=run_dsc(dsc_blackjack)
 summaryResults<-aggregate(WinningsPerBet ~ scenario + method, res, mean)
+</code></pre>
 
 Please contact me if you have any trouble or if you make an interesting method I could add for comparison.   I would be really interested to see how big of an advantage you could get over the house if you had a perfect memory of the cards dealt.   I don't think this function would be too hard to write, but I haven't been able to find the time yet.
 
