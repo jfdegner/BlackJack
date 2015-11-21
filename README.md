@@ -7,10 +7,24 @@ https://github.com/stephens999/dscr/blob/master/intro.md
 
 A hypothetical user of this DSCR I imagine to be someone who wants to understand blackjack and card counting or someone who has imagined a new card counting strategy and wants to compare it to those already implimented here.
 
-One of the main points of putting a simulation framework like this into a DSCR is so it can be easily used and extended.   Below, I try to succinctly describe how to 
+One of the main points of putting a simulation framework like this into a DSCR is so it can be easily reproduced and extended.  While there exist many more nobel problems where these goals should be strived for, I choose to make my first DSCR about blackjack.  Below, I try to succinctly describe how to:
 
-1) Clone this repo and repeat the simulations I describe below
-2) Add a new blackjack strategy
+1) Clone this repo and repeat the simulations I describe below  
+2) Add a new blackjack strategy  
+
+# Cloning and running the current version:
+
+Get the necessary dependencies in R:
+library(devtools)
+install_github("stephens999/ashr")
+install_github("stephens999/dscr",build_vignettes=TRUE)
+
+Clone this repo to your computer (which should already have git and R):
+
+git clone https://github.com/jfdegner/BlackJack.git
+
+Run the simulations:
+
 
 
 This DSC uses the following formats:
