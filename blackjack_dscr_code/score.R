@@ -23,9 +23,9 @@ if(decision == 'Sp') {
   #Right now it is hard coded that there is only one split allowed.   I think this is pretty standard but could be allowed to vary in the future
   player1 <- c(player[1], data$meta$cards_to_deal[[j]][i])
   player2 <- c(player[2], data$meta$cards_to_deal[[j]][i + 1])
-  D1 <- output$decisionFunction(player1, dealer[1], disallowed='Sp')
+  D1 <- output$decisionFunction(player1, dealer[1], data$meta$cards_seen[[j]], disallowed='Sp')
   #print(list(D1, player1, player, dealer))
-  D2 <- output$decisionFunction(player2, dealer[1], disallowed='Sp')
+  D2 <- output$decisionFunction(player2, dealer[1], data$meta$cards_seen[[j]], disallowed='Sp')
   #print(list(D2, player2, player, dealer))
   bet1=bet2=bet
   i=i+2
@@ -36,7 +36,7 @@ if(decision == 'Sp') {
     while(sum(player1) > 21 & sum(player1==11) > 0) {
       player1[player1==11][1] = 1
     }
-    D1 <- output$decisionFunction(player1, dealer[1])
+    D1 <- output$decisionFunction(player1, dealer[1], data$meta$cards_seen[[j]])
     #print(list(D1, player1, player, dealer))
   }
   if(D2 == 'D') {bet2 = bet2*2; player2 = c(player2, data$meta$cards_to_deal[[j]][i]); i=i+1; 
@@ -46,7 +46,7 @@ if(decision == 'Sp') {
     while(sum(player2) > 21 & sum(player2==11) > 0) {
       player2[player2==11][1] = 1
     }
-    D2 <- output$decisionFunction(player2, dealer[1])
+    D2 <- output$decisionFunction(player2, dealer[1], data$meta$cards_seen[[j]])
     #print(list(D2, player2, player, dealer))
   }
   while(sum(dealer) < 17 | (sum(dealer) == 17 & sum(dealer == 11) > 0)) {
@@ -97,10 +97,12 @@ if(decision == 'Sp') {
 while(decision == 'H') {
   player = c(player, data$meta$cards_to_deal[[j]][i])
   i=i+1
+  print(player)
   while(sum(player) > 21 & (sum(player==11) > 0)) {
+    print('here')
     player[player==11][1] <- 1
   }
-  decision <- output$decisionFunction(player, dealer[1])
+  decision <- output$decisionFunction(player, dealer[1], data$meta$cards_seen[[j]])
   #print(player, dealer)
 }
 #This part makes the dealers decision.   Could be put into seperate functions and made flexible for different rules.   For now it is just one way - dealer hits on soft 17.

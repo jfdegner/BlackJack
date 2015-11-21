@@ -1,4 +1,3 @@
-sourceDir("methods")
 methods=list()
 methods[[1]] = list(name="SimpleSumThresh",fn = SimpleSum,args=list(Thresh=16, bet=1))
 methods[[2]] = list(name="SimpleHitStand",fn = SimpleHS,args=list(bet=1))
